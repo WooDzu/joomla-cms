@@ -2,46 +2,66 @@ application: woodzu123
 version: setup
 runtime: php
 api_version: 1
-#threadsafe: false
+#threadsafe: true
+
+skip_files:
+- ^(.*/)?#.*#$
+- ^(.*/)?.*~$
+- ^(.*/)?.*\.py[co]$
+- ^(.*/)?.*/RCS/.*$
+- ^(.*/)?\..*$
+
 
 handlers:
 
-- url: /media/(.*\.(css$|$js|ico$|jpg$|png$|gif$))
-static_files: media/\1
-upload: /media/(.*\.(css$|$js|ico$|jpg$|png$|gif$))
+- url: /media/(.*\.(css$|js$|ico$|jpg$|png$|gif$))
+  static_files: media/\1
+  upload: /media/(.*\.(css$|js$|ico$|jpg$|png$|gif$))
+  application_readable: true
 
-- url: /templates/(.*\.(css$|$js|ico$|jpg$|png$|gif$))
-static_files: templates/\1
-upload: templates/(.*\.(css$|$js|ico$|jpg$|png$|gif$))
-secure: always
+- url: /templates/(.*\.(css$|js$|ico$|jpg$|png$|gif$))
+  static_files: templates/\1
+  upload: templates/(.*\.(css$|js$|ico$|jpg$|png$|gif$))
+  application_readable: true
 
-- url: /administrator/templates/(.*\.(css$|$js|ico$|jpg$|png$|gif$))
-static_files: administrator/templates/\1
-upload: administrator/templates/(.*\.(css$|$js|ico$|jpg$|png$|gif$))
-application_readable: true
-secure: always
+- url: /administrator/templates/(.*\.(css$|js$|ico$|jpg$|png$|gif$))
+  static_files: administrator/templates/\1
+  upload: administrator/templates/(.*\.(css$|js$|ico$|jpg$|png$|gif$))
+  application_readable: true
+  secure: always
 
-- url: /installation/template/(.*\.(css$|$js|ico$|jpg$|png$|gif$))
-static_files: installation/template/\1
-upload: installation/template/(.*\.(css$|$js|ico$|jpg$|png$|gif$))
-application_readable: true
-secure: always
+- url: /installation/template/(.*\.(css$|js$|ico$|jpg$|png$|gif$))
+  static_files: installation/template/\1
+  upload: installation/template/(.*\.(css$|js$|ico$|jpg$|png$|gif$))
+  application_readable: true
+  secure: always
+
 
 - url: /installation/(.+)
-script: installation/\1
-secure: always
+  script: installation/\1
+  secure: always
+  login: admin
+
 
 - url: /installation/
-script: installation/index.php
-secure: always
+  script: installation/index.php
+  secure: always
+  login: admin
 
 - url: /administrator/(.+)
-script: administrator/\1
-secure: always
+  script: administrator/\1
+  secure: always
+  login: admin
 
 - url: /administrator/
-script: administrator/index.php
-secure: always
+  script: administrator/index.php
+  secure: always
+  login: admin
+
+- url: /info.php
+  script: info.php
+  secure: always
+  login: admin
 
 - url: /(.+)?/?
-script: index.php
+  script: index.php
