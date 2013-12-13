@@ -125,6 +125,12 @@ class JApplicationCms extends JApplicationWeb
 			$this->config->set('session_name', $this->getName());
 		}
 
+		// Force GAE memcached session handler if detected
+		if (isset($_SERVER['APPENGINE_RUNTIME']) && $this->config->get('session_handler') == null)
+		{
+			$this->config->set('session_handler', 'gaememcached');
+		}
+
 		// Create the session if a session name is passed.
 		if ($this->config->get('session') !== false)
 		{
