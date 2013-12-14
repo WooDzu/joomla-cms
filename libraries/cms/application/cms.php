@@ -126,7 +126,7 @@ class JApplicationCms extends JApplicationWeb
 		}
 
 		// Force GAE memcached session handler if detected
-		if (isset($_SERVER['APPENGINE_RUNTIME']) && $this->config->get('session_handler') == null)
+		if (isset($_SERVER['HTTP_X_APPENGINE_REGION']) && $this->config->get('session_handler') == null)
 		{
 			$this->config->set('session_handler', 'gaememcached');
 		}

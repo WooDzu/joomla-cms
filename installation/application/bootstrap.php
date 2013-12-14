@@ -9,6 +9,11 @@
 
 defined('_JEXEC') or die;
 
+if (file_exists(realpath(__DIR__ . '/../../defines.php')))
+{
+	include_once realpath(__DIR__ . '/../../defines.php');
+}
+
 // Define the base path and require the other defines
 define('JPATH_BASE', dirname(__DIR__));
 require_once __DIR__ . '/defines.php';
