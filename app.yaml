@@ -13,15 +13,12 @@ skip_files:
 
 
 handlers:
-
-- url: /media/(.*)
-  static_files: media/\1
-  upload: /media/(.*)
+- url: /media
+  static_dir: media
   application_readable: true
 
-- url: /images/(.*)
-  static_files: images/\1
-  upload: /images/(.*)
+- url: /images
+  static_dir: images
   application_readable: true
 
 - url: /templates/(.*\.(css$|js$|ico$|jpg$|png$|gif$))
@@ -46,7 +43,6 @@ handlers:
   script: installation/\1
   secure: always
   login: admin
-
 
 - url: /installation/
   script: installation/index.php
